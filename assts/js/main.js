@@ -101,15 +101,13 @@ console.log(testButton);
 for (i = 0; i < testButton.length; i++) {
   testButton[i].addEventListener(`click`, (event) => {
     data.forEach((element) => {
-      // if (element.choice.includes(event.target.textContent)) {
-      console.log(element.choice);
-      console.log(element.answer);
-      if (element.choice[i] == element.answer) {
-        event.target.style.backgroundColor = `green`;
-      } else {
-        event.target.style.backgroundColor = `red`;
+      if (element.choice.includes(event.target.textContent)) {
+        if (element.answer == event.target.textContent) {
+          event.target.style.backgroundColor = `green`;
+        } else {
+          event.target.style.backgroundColor = `red`;
+        }
       }
-      // }
     });
   });
 }
