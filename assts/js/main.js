@@ -20,14 +20,14 @@ let data = [
   {
     url: "https://cdn.playbuzz.com/cdn//f063e8fe-ad57-485e-8211-ed2ee0d9a205/467a486b-be3a-4183-90ed-dd6867d5852d.jpg",
     question: "True or False: Iceland is covered in ice.",
-    choice: [true, false],
-    answer: false,
+    choice: ["true", "false"],
+    answer: "false",
   },
   {
     url: "https://cdn.playbuzz.com/cdn//f063e8fe-ad57-485e-8211-ed2ee0d9a205/ecf8af7b-8541-4572-b63b-ee7d7f9fc4cc.jpg",
     question: "The United Kingdom is comprised of how many countries?",
-    choice: [1, 2, 3, 4],
-    answer: 4,
+    choice: ["1", "2", "3", "4"],
+    answer: "4",
   },
   {
     url: "https://cdn.playbuzz.com/cdn//f063e8fe-ad57-485e-8211-ed2ee0d9a205/ecf8af7b-8541-4572-b63b-ee7d7f9fc4cc.jpg",
@@ -66,6 +66,7 @@ let img;
 let questionTag;
 let choicesDiv;
 let button;
+let choicearray = [];
 const createQuiz = () => {
   for (let i = 0; i < data.length; i++) {
     questionDiv = document.createElement(`div`);
@@ -87,6 +88,7 @@ const createQuiz = () => {
       button = document.createElement(`button`);
       button.setAttribute(`id`, `${i}`);
       button.textContent = data[i].choice[j];
+
       choicesDiv.appendChild(button);
     }
     questionDiv.appendChild(choicesDiv);
@@ -94,15 +96,21 @@ const createQuiz = () => {
 };
 
 createQuiz();
+console.log(button);
 
 const testButton = document.getElementsByTagName(`button`);
-console.log(testButton);
+console.log(testButton[0].innerHTML);
 
 for (i = 0; i < testButton.length; i++) {
   testButton[i].addEventListener(`click`, (event) => {
     data.forEach((element) => {
       if (element.choice.includes(event.target.textContent)) {
-        if (element.answer == event.target.textContent) {
+        if (element.answer.toString() == event.target.textContent) {
+          for (j = 0; j < testButton.length; j++) {
+            if (testButton[j].id == event.target.id) {
+              testButton[j].style.backgroundColor = `#2e2e2e`;
+            }
+          }
           event.target.style.backgroundColor = `green`;
         } else {
           event.target.style.backgroundColor = `red`;
